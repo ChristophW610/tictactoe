@@ -1,0 +1,9 @@
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/tiktaktoe.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/edit_cache.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/rebuild_cache.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/list_install_components.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/install.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/install/local.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/install/strip.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/tiktaktoe_autogen_timestamp_deps.dir
+/home/admin/tiktaktoe/build/clang_qt_6_8_2-Debug/CMakeFiles/tiktaktoe_autogen.dir
