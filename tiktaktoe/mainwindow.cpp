@@ -110,184 +110,74 @@ void MainWindow::computerZug(){
     boardAktualisieren();
 }
 
+void MainWindow::buttonClicked(std::pair<int, int> zug){
+
+    if(spielBeendet || spielfeld.board[zug.first][zug.second] != "") return;
+    spielfeld.setFeld(zug.first, zug.second, "x");
+    boardAktualisieren();
+    if(spielfeld.spielfeldVoll()){
+        spielBeendet = true;
+        ui->label->setText("Unentschieden!");
+    }
+    if(spielfeld.prüfeGewinner()){
+        ui->label->setText("Du hast gewonnen!");
+        spielBeendet = true;
+    }
+    computerZug();
+}
+
 void MainWindow::on_A1_clicked()
 {
-    if(!spielBeendet){
-        if(ui->A1->text() == ""){
-            spielfeld.setFeld(0, 0, "x");
-            boardAktualisieren();
-            //ui->A1->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {0, 0};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_A2_clicked()
 {
-    if(!spielBeendet){
-        if(ui->A2->text() == ""){
-            spielfeld.setFeld(0, 1, "x");
-            boardAktualisieren();
-            //ui->A2->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {0, 1};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_A3_clicked()
 {
-    if(!spielBeendet){
-        if(ui->A3->text() == ""){
-            spielfeld.setFeld(0, 2, "x");
-            boardAktualisieren();
-            //ui->A3->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {0, 2};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_B1_clicked()
 {
-    if(!spielBeendet){
-        if(ui->B1->text() == ""){
-            spielfeld.setFeld(1, 0, "x");
-            boardAktualisieren();
-            //ui->B1->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {1, 0};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_B2_clicked()
 {
-    if(!spielBeendet){
-        if(ui->B2->text() == ""){
-            spielfeld.setFeld(1, 1, "x");
-            boardAktualisieren();
-            //ui->B2->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {1, 1};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_B3_clicked()
 {
-    if(!spielBeendet){
-        if(ui->B3->text() == ""){
-            spielfeld.setFeld(1, 2, "x");
-            boardAktualisieren();
-            //ui->B3->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {1, 2};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_C1_clicked()
 {
-    if(!spielBeendet){
-        if(ui->C1->text() == ""){
-            spielfeld.setFeld(2, 0, "x");
-            boardAktualisieren();
-            //ui->C1->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {2, 0};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_C2_clicked()
 {
-    if(!spielBeendet){
-        if(ui->C2->text() == ""){
-            spielfeld.setFeld(2, 1, "x");
-            boardAktualisieren();
-            //ui->C2->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {2, 1};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_C3_clicked()
 {
-    if(!spielBeendet){
-        if(ui->C3->text() == ""){
-            spielfeld.setFeld(2, 2, "x");
-            boardAktualisieren();
-            //ui->C3->setText("x");
-            if(spielfeld.prüfeGewinner()){
-                ui->label->setText("Du hast gewonnen!");
-                spielBeendet = true;
-            }
-            if(spielfeld.spielfeldVoll()){
-                spielBeendet = true;
-                ui->label->setText("Unentschieden!");
-            }
-            computerZug();
-        }
-    }
+    std::pair<int, int> feld = {2, 2};
+    buttonClicked(feld);
 }
 
 void MainWindow::on_resetButton_clicked()

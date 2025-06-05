@@ -29,6 +29,7 @@ public:
     int bewerten(QString b[3][3]);
     void boardAktualisieren();
     bool spielBeendet;
+    void buttonClicked(std::pair<int, int> zug);
 
 private slots:
     void on_A1_clicked();
