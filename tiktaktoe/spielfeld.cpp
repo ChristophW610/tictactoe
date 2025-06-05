@@ -82,3 +82,10 @@ bool Spielfeld::spielfeldVoll(){
     }
     return true;
 }
+
+QString Spielfeld::getSymbol(QString name) {
+    QChar zeichen = name.at(0).toUpper();
+    int zeile = zeichen.unicode() - 'A';
+    int spalte = name.at(1).digitValue() - 1;
+    return board[zeile][spalte];
+}

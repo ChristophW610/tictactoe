@@ -114,4 +114,61 @@ int Computer::bewerten(QString b[3][3]){
     return 0;
 }
 
+void Computer::bestenZugMachen(Spielfeld& spielfeld, QString b[3][3]){
+    std::pair<int, int> zug = findeBestenZug(b);
+    int i = zug.first;
+    int j = zug.second;
+    if (i != -1 && j != -1) {
+        spielfeld.setFeld(i, j, "o");
+    }
+}
+
+bool Computer::versucheZug(QString symbol, Spielfeld& spielfeld){
+    QString kombis[8][3] = {
+        {"A1", "A2", "A3"},
+        {"B1", "B2", "B3"},
+        {"C1", "C2", "C3"},
+        {"A1", "B1", "C1"},
+        {"A2", "B2", "C2"},
+        {"A3", "B3", "C3"},
+        {"A1", "B2", "C3"},
+        {"A3", "B2", "C1"}
+    };
+
+    for (int i = 0; i < 8; ++i) {
+        QString t1 = kombis[i][0];
+        QString t2 = kombis[i][1];
+        QString t3 = kombis[i][2];
+
+        int count = 0;
+        QString leer = "";
+        if(spielfeld.getSymbol(t1) == symbol) count++; else if (spielfeld.getSymbol(t1) == "") leer = t1;
+        if(spielfeld.getSymbol(t2) == symbol) count++; else if (spielfeld.getSymbol(t2) == "") leer = t2;
+        if(spielfeld.getSymbol(t3) == symbol) count++; else if (spielfeld.getSymbol(t3) == "") leer = t3;
+
+        if (count == 2 && leer != "") {
+            QChar zeichen = leer.at(0).toUpper();
+            int zeile = zeichen.unicode() - 'A';
+            int spalte = leer.at(1).digitValue() - 1;
+            spielfeld.setFeld(zeile, spalte, "o");
+            return true;
+        }
+    }
+    return false;
+}
+
+void Computer::zug(QString schwierigkeitsgrad, Spielfeld& spielfeld){
+    if(schwierigkeitsgrad == "unmöglich"){
+        bestenZugMachen(spielfeld, spielfeld.board);
+        return;
+    }else if(schwierigkeitsgrad == "schwer"){
+        //wenn gewinnen kann, dann gewinnen
+        if(versucheZug("o", spielfeld)) return;
+
+        //wenn blocken kann, dann blocken
+        if(versucheZug("x", spielfeld)) return;
+    }
+    randomZug(spielfeld);
+}
+
 

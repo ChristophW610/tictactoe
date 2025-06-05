@@ -13,6 +13,7 @@ public:
     void clear();
     bool prüfeGewinner();
     bool spielfeldVoll();
+    QString getSymbol(QString name);
 };
 
 #endif // SPIELFELD_H
