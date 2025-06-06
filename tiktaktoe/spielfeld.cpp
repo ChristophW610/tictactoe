@@ -2,19 +2,16 @@
 #include <iostream>
 #include <string>
 #include <random>
-using namespace std;
-
 
 Spielfeld::Spielfeld() {}
-
-void Spielfeld::test(){
-    cout << "Test" << endl;
-}
-
 QString board[3][3];
 
 void Spielfeld::setFeld(int eins, int zwei, QString symbol){
     board[eins][zwei] = symbol;
+}
+
+QString getFeld(int i, int j){
+    return board[i][j];
 }
 
 void Spielfeld::clear(){
@@ -38,21 +35,9 @@ bool Spielfeld::prüfeGewinner(){
     };
 
     for (const auto& kombi : kombinationen) {
-
-        QChar zeichen = kombi[0].at(0).toUpper();
-        int zeile = zeichen.unicode() - 'A';
-        int spalte = kombi[0].at(1).digitValue() - 1;
-        QString b1 = board[zeile][spalte];
-
-        zeichen = kombi[1].at(0).toUpper();
-        zeile = zeichen.unicode() - 'A';
-        spalte = kombi[1].at(1).digitValue() - 1;
-        QString b2 = board[zeile][spalte];
-
-        zeichen = kombi[2].at(0).toUpper();
-        zeile = zeichen.unicode() - 'A';
-        spalte = kombi[2].at(1).digitValue() - 1;
-        QString b3 = board[zeile][spalte];
+        QString b1 = getSymbol(kombi[0]);
+        QString b2 = getSymbol(kombi[1]);
+        QString b3 = getSymbol(kombi[2]);
 
         if (b1 == b2 && b2 == b3 && b1 != ""){
             return true;
@@ -69,14 +54,7 @@ bool Spielfeld::spielfeldVoll(){
     };
 
     for (const QString& name : felder) {
-
-
-        QChar zeichen = name.at(0).toUpper();
-        int zeile = zeichen.unicode() - 'A';
-        int spalte = name.at(1).digitValue() - 1;
-        QString symbol = board[zeile][spalte];
-
-        if (symbol == "") {
+        if (getSymbol(name) == "") {
             return false;
         }
     }

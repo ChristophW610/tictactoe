@@ -1,13 +1,11 @@
 #include "mainwindow.h"
 #include "./ui_mainwindow.h"
 #include <iostream>
-#include <string>
 #include <random>
-using namespace std;
+#include <thread>
+#include <chrono>
 
-bool spielBeendet = false;
 QString schwierigkeitsgrad;
-Spielfeld spielfeld;
 
 MainWindow::MainWindow(QWidget *parent)
     : QMainWindow(parent)
@@ -23,25 +21,24 @@ MainWindow::~MainWindow()
 }
 
 void MainWindow::buttonClicked(std::pair<int, int> zug){
-
     if(spielBeendet || spielfeld.board[zug.first][zug.second] != "") return;
     spielfeld.setFeld(zug.first, zug.second, "x");
     boardAktualisieren();
-    if(spielfeld.spielfeldVoll()){
-        spielBeendet = true;
-        ui->label->setText("Unentschieden!");
-    }
     if(spielfeld.prüfeGewinner()){
         ui->label->setText("Du hast gewonnen!");
         spielBeendet = true;
+        return;
+    }else if(spielfeld.spielfeldVoll()){
+        spielBeendet = true;
+        ui->label->setText("Unentschieden!");
+        return;
     }
-    if(spielBeendet || spielfeld.spielfeldVoll()) return;
     computer.zug(schwierigkeitsgrad, spielfeld);
-    boardAktualisieren();
     if (spielfeld.prüfeGewinner()) {
         ui->label->setText("Du hast verloren!");
         spielBeendet = true;
     }
+    boardAktualisieren();
 }
 
 void MainWindow::on_A1_clicked()
@@ -119,7 +116,6 @@ void MainWindow::on_comboBox_activated(int index)
 
 void MainWindow::boardAktualisieren(){
     QString reihen[] = {"A", "B", "C"};
-
     for(int i = 0; i < 3; ++i){
         for(int j = 0; j < 3; ++j){
             QString feldName = reihen[i] + QString::number(j + 1);

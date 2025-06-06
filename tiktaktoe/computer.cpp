@@ -2,7 +2,6 @@
 #include <iostream>
 #include <string>
 #include <random>
-using namespace std;
 
 Computer::Computer() {}
 
@@ -14,10 +13,7 @@ void Computer::randomZug(Spielfeld& spielfeld){
     };
     std::vector<QString> freie;
     for (const QString& name : felder) {
-        QChar zeichen = name.at(0).toUpper();
-        int zeile = zeichen.unicode() - 'A';
-        int spalte = name.at(1).digitValue() - 1;
-        QString symbol = spielfeld.board[zeile][spalte];
+        QString symbol = spielfeld.getSymbol(name);
         if (symbol == "") {
             freie.push_back(name);
         }
@@ -28,7 +24,6 @@ void Computer::randomZug(Spielfeld& spielfeld){
         std::default_random_engine eng(rd());
         std::uniform_int_distribution<int> distr(0, freie.size() - 1);
         QString zufallsFeld = freie[distr(eng)];
-        //findChild<QPushButton*>(zufallsFeld)->setText("o");
         QChar zeichen = zufallsFeld.at(0).toUpper();
         int zeile = zeichen.unicode() - 'A';
         int spalte = zufallsFeld.at(1).digitValue() - 1;
@@ -170,5 +165,3 @@ void Computer::zug(QString schwierigkeitsgrad, Spielfeld& spielfeld){
     }
     randomZug(spielfeld);
 }
-
-
